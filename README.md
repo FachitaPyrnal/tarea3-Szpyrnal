@@ -1,59 +1,69 @@
-# Tarea3Szpyrnal
+# Gestión de productos con Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.21.
+Aplicación desarrollada para la actividad de Angular intermedio sobre servicios y pipes. Permite consultar un inventario simulado, agregar productos, eliminarlos y visualizar precios y fechas con transformaciones de Angular.
 
-## Development server
+## Funcionalidades
 
-To start a local development server, run:
+- Servicio `ProductosService` con los métodos `getProductos()`, `addProducto()` y `deleteProducto()`.
+- Inyección del servicio en el componente `lista-productos`.
+- Carga inicial de datos mediante el ciclo de vida `ngOnInit`.
+- Alta de productos con formulario reactivo y validaciones.
+- Eliminación individual y vaciado completo del inventario.
+- Mensaje dinámico cuando la lista no contiene productos.
+- Pipe `currency` para precios y pipe `date` para fechas de alta.
+- Pipe personalizado `descuento` para calcular el precio final.
 
-```bash
-ng serve
-```
+## Requisitos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Node.js 20.19 o superior.
+- npm 11 o compatible.
+- Angular CLI 21.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Instalación y ejecución
 
 ```bash
-ng build
+git clone https://github.com/FachitaPyrnal/tarea3-Szpyrnal.git
+cd tarea3-Szpyrnal
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Abrir `http://localhost:4200/` en el navegador.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Pruebas y compilación
 
 ```bash
-ng test
+npm test -- --watch=false
+npm run build
 ```
 
-## Running end-to-end tests
+## Estructura principal
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```text
+src/app/
+|-- lista-productos/   # Componente e interfaz de inventario
+|-- models/            # Interfaz Producto
+|-- pipes/             # Pipe personalizado descuento
+`-- services/          # Servicio de productos
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Capturas
 
-## Additional Resources
+- `screenshots/01-lista-productos.png`: lista inicial con precios, fechas y descuentos.
+- `screenshots/02-producto-agregado.png`: formulario y nuevo producto agregado.
+- `screenshots/03-lista-vacia.png`: estado dinámico sin productos.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Créditos
+
+- Estudiante: Ivan Szpyrnal
+- Curso: Angular intermedio
+- Módulo 1 - Unidad 3: Gestión y visualización de datos con pipes
+
+## Fuentes
+
+- [Angular - Dependency injection](https://angular.dev/guide/di/dependency-injection)
+- [Angular - Pipes](https://angular.dev/guide/templates/pipes)
+- [Angular - Reactive forms](https://angular.dev/guide/forms/reactive-forms)
+- Freeman, A. *Pro Angular 9*. 6.a ed., Apress, 2020.
+
+No se utilizaron imágenes externas en el proyecto.

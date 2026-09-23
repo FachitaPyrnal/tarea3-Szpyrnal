@@ -1,0 +1,115 @@
+<header class="page-header">
+  <div class="header-content">
+    <div>
+      <p class="eyebrow">Inventario digital</p>
+      <h1>Gestión de productos</h1>
+      <p class="subtitle">Administrá el catálogo y revisá los precios finales en un solo lugar.</p>
+    </div>
+
+    <div class="product-count" aria-label="Cantidad de productos">
+      <strong>{{ productos.length }}</strong>
+      <span>{{ productos.length === 1 ? 'producto' : 'productos' }}</span>
+    </div>
+  </div>
+</header>
+
+<div class="workspace">
+  <aside class="form-panel">
+    <div class="section-heading">
+      <p class="section-number">01</p>
+      <div>
+        <h2>Nuevo producto</h2>
+        <p>Completá los datos para sumarlo al inventario.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="productoForm" (ngSubmit)="agregarProducto()" novalidate>
+      <label for="nombre">Nombre</label>
+      <input
+        id="nombre"
+        type="text"
+        formControlName="nombre"
+        placeholder="Ej.: Auriculares"
+        [class.invalid]="controlInvalido('nombre')"
+      />
+      <small *ngIf="controlInvalido('nombre')">Ingresá un nombre de al menos 3 caracteres.</small>
+
+      <label for="precio">Precio</label>
+      <div class="price-input">
+        <span>$</span>
+        <input
+          id="precio"
+          type="number"
+          min="1"
+          formControlName="precio"
+          placeholder="0"
+          [class.invalid]="controlInvalido('precio')"
+        />
+      </div>
+      <small *ngIf="controlInvalido('precio')">Ingresá un precio mayor a cero.</small>
+
+      <label for="descuento">Descuento</label>
+      <div class="discount-input">
+        <input
+          id="descuento"
+          type="number"
+          min="0"
+          max="90"
+          formControlName="descuento"
+          [class.invalid]="controlInvalido('descuento')"
+        />
+        <span>%</span>
+      </div>
+      <small *ngIf="controlInvalido('descuento')">Usá un porcentaje entre 0 y 90.</small>
+
+      <button class="primary-button" type="submit">Agregar producto</button>
+    </form>
+
+    <p class="feedback" *ngIf="mensaje" role="status">{{ mensaje }}</p>
+  </aside>
+
+  <section class="inventory" aria-labelledby="inventory-title">
+    <div class="inventory-heading">
+      <div class="section-heading">
+        <p class="section-number">02</p>
+        <div>
+          <h2 id="inventory-title">Productos activos</h2>
+          <p>Precios y fechas transformados con pipes de Angular.</p>
+        </div>
+      </div>
+
+      <button class="secondary-button" type="button" *ngIf="productos.length" (click)="vaciarLista()">
+        Vaciar lista
+      </button>
+    </div>
+
+    <div class="product-grid" *ngIf="productos.length > 0; else listaVacia">
+      <article class="product-card" *ngFor="let producto of productos">
+        <div class="card-topline">
+          <span class="discount-badge">-{{ producto.descuento }}%</span>
+          <span class="date">Alta {{ producto.fechaAlta | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <h3>{{ producto.nombre }}</h3>
+
+        <div class="price-block">
+          <span class="original-price">{{ producto.precio | currency: 'ARS':'symbol-narrow':'1.0-0' }}</span>
+          <strong>{{ producto.precio | descuento: producto.descuento | currency: 'ARS':'symbol-narrow':'1.0-0' }}</strong>
+          <span class="price-caption">Precio final con descuento</span>
+        </div>
+
+        <button class="delete-button" type="button" (click)="eliminarProducto(producto)">
+          Eliminar
+        </button>
+      </article>
+    </div>
+
+    <ng-template #listaVacia>
+      <div class="empty-state">
+        <span class="empty-mark" aria-hidden="true">0</span>
+        <h3>No hay productos cargados</h3>
+        <p>Usá el formulario para agregar el primer producto al inventario.</p>
+      </div>
+    </ng-template>
+  </section>
+</div>
