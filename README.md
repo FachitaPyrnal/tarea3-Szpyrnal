@@ -47,12 +47,6 @@ src/app/
 `-- services/          # Servicio de productos
 ```
 
-## Capturas
-
-- `screenshots/01-lista-productos.png`: lista inicial con precios, fechas y descuentos.
-- `screenshots/02-producto-agregado.png`: formulario y nuevo producto agregado.
-- `screenshots/03-lista-vacia.png`: estado dinámico sin productos.
-
 ## Créditos
 
 - Estudiante: Ivan Szpyrnal
